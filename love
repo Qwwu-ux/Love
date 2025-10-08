@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Love Letter to Malak</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f8c8dc, #f6e1f9);
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: absolute;
+    font-size: 1.5rem;
+    color: #e63946;
+    animation: float 10s linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+  }
+
+  /* Heading */
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #e63946;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+
+  .love-heart {
+    animation: beat 1s infinite;
+    display: inline-block;
+    margin-left: 5px;
+  }
+
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+
+  /* Paragraphs */
+  .para {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 15px auto;
+    background: rgba(230, 57, 70, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 700px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 0.8s ease;
+  }
+
+  .para.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-btn {
+    background: #e63946;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 25px;
+  }
+
+  .reveal-btn:hover {
+    background: #c5303f;
+    transform: scale(1.05);
+  }
+</style>
+</head>
+<body>
+
+  <!-- Floating hearts container -->
+  <div id="hearts"></div>
+
+  <!-- Heading -->
+  <h1>To My Beloved Malak <span class="love-heart">❤️</span></h1>
+
+  <!-- Letter Paragraphs -->
+  <div id="letter">
+    <p class="para">From the moment I met you, Malak, my world has been brighter, my heart fuller, and my soul lighter. Every day feels like a gift because you are in it.</p>
+    <p class="para">You are not only my love, but my best friend, my safe place, and my inspiration. Every heartbeat reminds me how lucky I am to have you.</p>
+    <p class="para">I promise to stand by you, cherish you, and nurture our love through every challenge and every joy. You make my life beautiful in ways I never imagined.</p>
+    <p class="para">Thank you, Malak, for being my everything, for holding my heart, and for filling my life with endless happiness and love. I love you more than words can ever express.</p>
+    <button class="reveal-btn" id="revealBtn">Reveal My Love</button>
+  </div>
+
+  <!-- Optional Romantic Music -->
+  <audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Reveal paragraphs one by one
+    const paragraphs = document.querySelectorAll('.para');
+    const revealBtn = document.getElementById('revealBtn');
+    const music = document.getElementById('music');
+
+    revealBtn.addEventListener('click', () => {
+      paragraphs.forEach((p, index) => {
+        setTimeout(() => {
+          p.classList.add('show');
+        }, index * 700);
+      });
+      revealBtn.style.display = 'none';
+      // Start music on interaction
+      music.volume = 0.3;
+      music.play().catch(()=>{});
+    });
+
+    // Floating hearts animation
+    const heartsContainer = document.getElementById('hearts');
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
